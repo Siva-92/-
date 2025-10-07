@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Quiz App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1 class= "Heading"><b>Interactive Quiz</b></h1>
+  <div class="quiz-container">
+    <h2 id="question">Question:</h2>
+    <div class="options">
+      <button id="optionA" onclick="selectOption(this)"></button>
+      <button id="optionB" onclick="selectOption(this)"></button>
+      <button id="optionC" onclick="selectOption(this)"></button>
+      <button id="optionD" onclick="selectOption(this)"></button>
+    </div>
+    <button id="nextBtn" onclick="nextQuestion()">Next</button>
+    <div id="score"></div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

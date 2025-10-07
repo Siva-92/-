@@ -1,0 +1,213 @@
+/* ----------- GENERAL LAYOUT ----------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ----------- HEADING ----------- */
+.Heading {
+  position: fixed;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+/* ----------- BODY ----------- */
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  padding-top: 4rem; /* space for fixed heading */
+}
+
+/* ----------- QUIZ CONTAINER ----------- */
+.quiz-container {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 2rem 3rem;
+  width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.quiz-container:hover {
+  transform: translateY(-3px);
+}
+
+/* ----------- QUESTION ----------- */
+#question {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  color: #e0e0e0;
+}
+
+/* ----------- OPTIONS ----------- */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+
+.options button {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1rem;
+  padding: 0.8rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+/* ----------- SELECTED ANSWER (Before submission) ----------- */
+.options button.selected {
+  background: #ffffff;
+  color: #000;
+  font-weight: 600;
+  border: 2px solid #fff;
+  transform: scale(1.03);
+  transition: all 0.2s ease-in-out;
+}
+
+/* When hovered */
+.options button:hover {
+  background: rgb(255, 255, 255);
+  transform: scale(1.02);
+}
+
+/* When user selects an option */
+.options button.selected {
+  background: #ffffff;
+  color: #000;
+  font-weight: 600;
+}
+
+/* Correct and wrong answer states */
+.options button.correct {
+  background: #00cc66;
+  color: #fff;
+  font-weight: 600;
+}
+
+.options button.wrong {
+  background: #ff4d4d;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* Disable clicks */
+.options button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ----------- NEXT BUTTON ----------- */
+#nextBtn {
+  background: #ffffff;
+  border: none;
+  color: #000;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#nextBtn:hover {
+  background: #00ffcc;
+  color: #000;
+}
+
+/* ----------- SCORE FEEDBACK ----------- */
+#score {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  min-height: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+/* Correct answer text */
+.correct-text {
+  color: #00ff88;
+  text-shadow: 0 0 8px #00ff88;
+}
+
+/* Wrong answer text */
+.wrong-text {
+  color: #ff4d4d;
+  text-shadow: 0 0 8px #ff4d4d;
+}
+
+/* ----------- FINAL SCORE SCREEN ----------- */
+.quiz-container h2 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: #00ffcc;
+}
+
+.quiz-container p {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.quiz-container button {
+  background: #ffffff;
+  color: #000;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.quiz-container button:hover {
+  background: #00ffcc;
+}
+
+/* ----------- BLINK ANIMATION FOR CORRECT ANSWER ----------- */
+@keyframes blink-correct {
+  0%, 100% {
+    background-color: #00ffcc;
+    color: #000;
+  }
+  50% {
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+}
+
+.correct-blink {
+  animation: blink-correct 0.5s ease-in-out 4;
+  border: 2px solid #00ffcc;
+}
+
+/* Smooth fade for feedback text */
+.fade-in {
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
