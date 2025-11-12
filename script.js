@@ -1,28 +1,38 @@
+let quizData = [];
 let current = 0;
 let score = 0;
 let selected = null;
-let quizData = [];
 let quizLength = 0;
 
-// Load CSV data
+// Load CSV but do not start quiz yet
 Papa.parse("Questions.csv", {
   download: true,
   header: true,
   complete: function (results) {
-    quizData = results.data;
-    console.log("Loaded questions:", quizData);
+    quizData = results.data.filter(q => q.Question); // remove empty rows
+    console.log("CSV loaded:", quizData.length, "questions found");
   },
+  error: function (err) {
+    console.error("Error loading CSV:", err);
+  }
 });
 
-// Wait for Start button
+// Start quiz when user clicks Start
 document.getElementById("startBtn").addEventListener("click", () => {
   const inputVal = parseInt(document.getElementById("quest").value);
-  if (isNaN(inputVal) || inputVal <= 0) {
+
+  if (!inputVal || inputVal <= 0) {
     alert("Please enter a valid number of questions!");
     return;
   }
 
-  quizLength = Math.min(inputVal, quizData.length);
+  if (inputVal > quizData.length) {
+    alert(`There are only ${quizData.length} questions available.`);
+    return;
+  }
+
+  quizLength = inputVal;
+
   document.querySelector(".FPage").hidden = true;
   document.querySelector(".quiz-container").hidden = false;
 
@@ -36,7 +46,7 @@ function startQuiz() {
   loadQuestion();
 }
 
-function loadQuestion() {
+const loadQuestion = () => {
   if (current >= quizLength) {
     showScore();
     return;
@@ -48,18 +58,19 @@ function loadQuestion() {
   document.getElementById("optionB").innerText = q["Option B"];
   document.getElementById("optionC").innerText = q["Option C"];
   document.getElementById("optionD").innerText = q["Option D"];
-  selected = null;
 
+  selected = null;
   const buttons = document.querySelectorAll(".options button");
   buttons.forEach((btn) => {
     btn.disabled = false;
-    btn.classList.remove("correct-blink", "blink", "correct", "wrong", "selected");
+    btn.classList.remove("correct-blink", "correct", "wrong", "selected");
     btn.style.background = "rgba(255,255,255,0.15)";
   });
 
-  document.getElementById("score").innerText = "";
-}
+  document.getElementById("score").innerText = `Question ${current + 1} of ${quizLength}`;
+};
 
+// Select answer
 function selectOption(button) {
   document.querySelectorAll(".options button").forEach((btn) =>
     btn.classList.remove("selected")
@@ -68,6 +79,7 @@ function selectOption(button) {
   selected = button.innerText;
 }
 
+// Next question logic
 function nextQuestion() {
   if (!selected) {
     alert("Please select an answer!");
@@ -77,21 +89,18 @@ function nextQuestion() {
   const correct = quizData[current].Answer;
   const scoreEl = document.getElementById("score");
   const buttons = document.querySelectorAll(".options button");
-
   buttons.forEach((btn) => (btn.disabled = true));
-  scoreEl.classList.remove("correct-text", "wrong-text");
 
   if (selected === correct) {
     score++;
-    scoreEl.innerHTML = `<b>(^0^) Correct!</b>`;
-    scoreEl.classList.add("correct-text");
+    scoreEl.innerHTML = `<b>(^0^) Correct!</b> (${score}/${quizLength})`;
+    scoreEl.className = "correct-text";
     buttons.forEach((btn) => {
       if (btn.innerText === correct) btn.classList.add("correct");
     });
   } else {
-    scoreEl.innerHTML = `<b>(＞︿＜) Wrong!</b> Correct: ${correct}`;
-    scoreEl.classList.add("wrong-text");
-
+    scoreEl.innerHTML = `<b>(＞︿＜) Wrong!</b> Correct: ${correct} (${score}/${quizLength})`;
+    scoreEl.className = "wrong-text";
     buttons.forEach((btn) => {
       if (btn.innerText === correct) btn.classList.add("correct-blink");
       if (btn.innerText === selected) btn.classList.add("wrong");
@@ -105,6 +114,7 @@ function nextQuestion() {
   }, 2000);
 }
 
+// Show final score
 function showScore() {
   document.querySelector(".quiz-container").innerHTML = `
     <h2>\\(^o^)/ Quiz Completed!</h2>
