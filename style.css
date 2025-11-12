@@ -15,9 +15,9 @@
   width: 100%;
   padding: 1rem;
   z-index: 1000;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(1, 47, 73, 0.8);
   backdrop-filter: blur(8px);
-  color: #fff;
+  color: #ffffff;
   font-size: 1.5rem;
   font-weight: 600;
   letter-spacing: 1px;
@@ -30,20 +30,20 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-  color: #fff;
+  background: linear-gradient(135deg, #012f49, #023f62, #0369a3);
+  color: #ffffff;
   padding-top: 4rem; /* space for fixed heading */
 }
 
 /* ----------- QUIZ CONTAINER ----------- */
 .quiz-container {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(12px);
   border-radius: 16px;
   padding: 2rem 3rem;
   width: 400px;
   text-align: center;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
   transition: transform 0.3s ease;
 }
 
@@ -56,7 +56,7 @@ body {
   font-size: 1.3rem;
   font-weight: 500;
   margin-bottom: 1.5rem;
-  color: #e0e0e0;
+  color: #e0f2ff;
 }
 
 /* ----------- OPTIONS ----------- */
@@ -69,47 +69,43 @@ body {
 
 .options button {
   background: rgba(255, 255, 255, 0.15);
-  border: none;
+  border: 2px solid transparent;
   border-radius: 8px;
-  color: #fff;
+  color: #ffffff;
   font-size: 1rem;
   padding: 0.8rem;
   cursor: pointer;
   transition: all 0.25s ease;
 }
+
 /* ----------- SELECTED ANSWER (Before submission) ----------- */
 .options button.selected {
-  background: #ffffff;
-  color: #000;
+  background: #0369a3;
+  border-color: #ffffff;
+  color: #ffffff;
   font-weight: 600;
-  border: 2px solid #fff;
   transform: scale(1.03);
   transition: all 0.2s ease-in-out;
 }
 
 /* When hovered */
 .options button:hover {
-  background: rgb(255, 255, 255);
+  background: #023f62;
   transform: scale(1.02);
-}
-
-/* When user selects an option */
-.options button.selected {
-  background: #ffffff;
-  color: #000;
-  font-weight: 600;
 }
 
 /* Correct and wrong answer states */
 .options button.correct {
-  background: #00cc66;
-  color: #fff;
+  background: #00b37d;
+  border-color: #00e6a8;
+  color: #ffffff;
   font-weight: 600;
 }
 
 .options button.wrong {
-  background: #ff4d4d;
-  color: #fff;
+  background: #e63b3b;
+  border-color: #ff6666;
+  color: #ffffff;
   font-weight: 600;
 }
 
@@ -121,9 +117,9 @@ body {
 
 /* ----------- NEXT BUTTON ----------- */
 #nextBtn {
-  background: #ffffff;
+  background: #0369a3;
   border: none;
-  color: #000;
+  color: #ffffff;
   font-size: 1rem;
   font-weight: 600;
   padding: 0.8rem 1.5rem;
@@ -133,8 +129,8 @@ body {
 }
 
 #nextBtn:hover {
-  background: #00ffcc;
-  color: #000;
+  background: #023f62;
+  color: #e0f2ff;
 }
 
 /* ----------- SCORE FEEDBACK ----------- */
@@ -148,31 +144,32 @@ body {
 
 /* Correct answer text */
 .correct-text {
-  color: #00ff88;
-  text-shadow: 0 0 8px #00ff88;
+  color: #00e6a8;
+  text-shadow: 0 0 8px #00e6a8;
 }
 
 /* Wrong answer text */
 .wrong-text {
-  color: #ff4d4d;
-  text-shadow: 0 0 8px #ff4d4d;
+  color: #ff6666;
+  text-shadow: 0 0 8px #ff6666;
 }
 
 /* ----------- FINAL SCORE SCREEN ----------- */
 .quiz-container h2 {
   margin-bottom: 1rem;
   font-weight: 600;
-  color: #00ffcc;
+  color: #00e6a8;
 }
 
 .quiz-container p {
   font-size: 1.1rem;
   margin-bottom: 1.5rem;
+  color: #e0f2ff;
 }
 
 .quiz-container button {
-  background: #ffffff;
-  color: #000;
+  background: #0369a3;
+  color: #ffffff;
   font-weight: 600;
   border: none;
   border-radius: 8px;
@@ -182,24 +179,24 @@ body {
 }
 
 .quiz-container button:hover {
-  background: #00ffcc;
+  background: #023f62;
 }
 
 /* ----------- BLINK ANIMATION FOR CORRECT ANSWER ----------- */
 @keyframes blink-correct {
   0%, 100% {
-    background-color: #00ffcc;
-    color: #000;
+    background-color: #00e6a8;
+    color: #012f49;
   }
   50% {
-    background-color: rgba(255, 255, 255, 0.15);
-    color: #fff;
+    background-color: #023f62;
+    color: #ffffff;
   }
 }
 
 .correct-blink {
   animation: blink-correct 0.5s ease-in-out 4;
-  border: 2px solid #00ffcc;
+  border: 2px solid #00e6a8;
 }
 
 /* Smooth fade for feedback text */
